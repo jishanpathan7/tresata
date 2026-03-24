@@ -44,8 +44,3 @@ npm run lint     # ESLint
 - **`useTasks` in `App`** and spread into route components keeps a single task array without Redux/context for this size.
 - **CSS files per feature** (no CSS-in-JS) for clarity and easy theming via `src/index.css` variables.
 - **`<details>`** for collapsible sections for accessible, keyboard-friendly expand/collapse without extra JS state.
-
-## Evaluation notes
-
-- **Edge cases:** Empty title blocked on add/edit; unknown edit id redirects home; delete is confirmed.
-- **Performance:** Filtering/grouping uses `useMemo`; updates are O(n) on the task list.
