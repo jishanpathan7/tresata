@@ -1,0 +1,19 @@
+.form-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  max-width: var(--max-app-width);
+  margin: 0 auto;
+  min-height: 100svh;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--color-bg-page);
+}
+
+@media (min-width: 600px) {
+  .form-page {
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.06);
+  }
+}

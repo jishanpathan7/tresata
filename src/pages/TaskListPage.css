@@ -1,0 +1,34 @@
+.task-list-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  max-width: var(--max-app-width);
+  margin: 0 auto;
+  min-height: 100svh;
+  background: var(--color-bg-page);
+  position: relative;
+  padding-bottom: max(96px, env(safe-area-inset-bottom));
+}
+
+.task-list-page__scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.task-list-page__empty {
+  margin: 48px 24px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 600px) {
+  .task-list-page {
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.06);
+  }
+}

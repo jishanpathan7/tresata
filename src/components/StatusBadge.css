@@ -1,0 +1,36 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-badge[data-status='pending'] {
+  color: #6b6b6b;
+}
+.status-badge[data-status='pending'] .status-badge-dot {
+  background: var(--status-pending);
+}
+
+.status-badge[data-status='in-progress'] {
+  color: #c45f00;
+}
+.status-badge[data-status='in-progress'] .status-badge-dot {
+  background: var(--status-in-progress);
+}
+
+.status-badge[data-status='completed'] {
+  color: var(--status-completed);
+}
+.status-badge[data-status='completed'] .status-badge-dot {
+  background: var(--status-completed);
+}

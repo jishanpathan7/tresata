@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# Tresata — Task Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A mobile-first **TO-DO** app built with **React**, **TypeScript**, and **Vite**. It matches the provided Figma-style layout: blue header, search, collapsible status groups, task cards with avatars and badges, add/edit forms, and a floating **+** button.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Task list** grouped by **In Progress**, **Pending**, and **Completed** (collapsible sections).
+- **Search** across title and description.
+- **Add task** (title + description); new tasks default to **Pending**.
+- **Edit task** (title, description, **status** dropdown).
+- **Delete** with confirmation dialog.
+- **Mark complete** via the circular avatar (toggles between completed and pending); completed titles use strikethrough.
+- **localStorage** persistence (`tresata-tasks`).
+- **Responsive** layout (centered column, max width ~480px; scales on larger screens).
+- **Animations**: card enter, dropdown, dialog, section content; respects `prefers-reduced-motion`.
 
-## React Compiler
+## How to run
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Requirements:** Node.js **20.19+** or **22.12+** (Vite 8).
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open the URL shown in the terminal (usually `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build    # production build
+npm run preview  # preview production build
+npm run lint     # ESLint
 ```
+
+## Project structure
+
+- `src/hooks/useTasks.ts` — task state + localStorage sync.
+- `src/types/task.ts` — `Task`, `TaskStatus`.
+- `src/pages/` — list, add, edit screens.
+- `src/components/` — header, search, sections, cards, form, FAB, dialogs, etc.
+
+## Design decisions
+
+- **React Router** (`react-router-dom`) for `/`, `/add`, `/edit/:id`. Non-home screens use a **top-left back control** that always navigates to **`/`** (home), matching the mobile design.
+- **`useTasks` in `App`** and spread into route components keeps a single task array without Redux/context for this size.
+- **CSS files per feature** (no CSS-in-JS) for clarity and easy theming via `src/index.css` variables.
+- **`<details>`** for collapsible sections for accessible, keyboard-friendly expand/collapse without extra JS state.
+
+## Evaluation notes
+
+- **Edge cases:** Empty title blocked on add/edit; unknown edit id redirects home; delete is confirmed.
+- **Performance:** Filtering/grouping uses `useMemo`; updates are O(n) on the task list.

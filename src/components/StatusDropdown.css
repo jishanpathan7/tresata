@@ -1,0 +1,116 @@
+.status-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.status-dropdown > label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.status-dropdown button[type='button']:first-of-type {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  text-align: left;
+  min-height: 48px;
+}
+
+.status-dropdown button[type='button']:first-of-type:hover {
+  border-color: var(--color-primary);
+}
+
+.status-dropdown button[type='button']:first-of-type:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.status-dropdown .trigger-label {
+  flex: 1;
+  font-weight: 500;
+}
+
+.status-dropdown .chevron {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.status-dropdown .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dropdown .dot.pending {
+  background: var(--status-pending);
+}
+
+.status-dropdown .dot.in-progress {
+  background: var(--status-in-progress);
+}
+
+.status-dropdown .dot.completed {
+  background: var(--status-completed);
+}
+
+.status-dropdown ul {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  animation: ddIn 0.15s ease-out;
+}
+
+@keyframes ddIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.status-dropdown ul button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.status-dropdown ul button:hover,
+.status-dropdown ul button:focus-visible {
+  background: #f0f4f8;
+  outline: none;
+}
+
+.status-dropdown ul button[aria-selected='true'] {
+  font-weight: 600;
+}
+
